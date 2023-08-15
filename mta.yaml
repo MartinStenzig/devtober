@@ -1,0 +1,139 @@
+_schema-version: "3.2"
+ID: devtober
+description: A simple CAP project.
+version: 1.0.0
+modules:
+  - name: devtober-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: devtober-auth
+      - name: devtober-db
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+  - name: devtober-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: devtober-db
+    parameters:
+      buildpack: nodejs_buildpack
+  - name: devtober-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: devtober-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - rizdevtoberuiadminapp.zip
+          name: rizdevtoberuiadminapp
+          target-path: resources/
+  - name: rizdevtoberuiadminapp
+    type: html5
+    path: app/adminapp
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms: []
+  - name: devtober-dest-content
+    type: com.sap.application.content
+    requires:
+      - name: srv-api
+      - name: devtober-destination-service
+        parameters:
+          content-target: true
+      - name: devtober-repo-host
+        parameters:
+          service-key:
+            name: devtober-repo-host-key
+      - name: devtober-auth
+        parameters:
+          service-key:
+            name: devtober-auth-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: devtober-srv-api
+              Authentication: OAuth2UserTokenExchange
+              TokenServiceInstanceName: devtober-auth
+              TokenServiceKeyName: devtober-auth-key
+              URL: ~{srv-api/srv-url}
+              sap.cloud.service: devtober
+            - Name: devtober_repo_host
+              ServiceInstanceName: devtober-html5-srv
+              ServiceKeyName: devtober-repo-host-key
+              sap.cloud.service: devtober
+            - Name: devtober_auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: devtober-auth
+              ServiceKeyName: devtober-auth-key
+              sap.cloud.service: devtober
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+resources:
+  - name: devtober-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        tenant-mode: dedicated
+        xsappname: devtober-${org}-${space}
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+  - name: devtober-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: devtober-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: devtober-html5-srv
+      service-plan: app-host
+  - name: devtober-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: devtober-destination-service
+      service-plan: lite
+  - name: devtober-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build --production

@@ -1,23 +1,37 @@
 {
-  "name": "devtober",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/cds": "^7",
-    "express": "^4"
-  },
-  "devDependencies": {
-    "@cap-js/sqlite": "^1",
-    "@sap/ux-specification": "^1.108.11"
-  },
-  "scripts": {
-    "start": "cds-serve",
-    "watch-adminapp": "cds watch --open adminapp/webapp/index.html?sap-ui-xx-viewCache=false"
-  },
-  "sapux": [
-    "app/adminapp"
-  ]
+    "name": "devtober",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^7",
+        "express": "^4",
+        "@sap/xssec": "^3",
+        "passport": "^0",
+        "@sap/cds-hana": "^2"
+    },
+    "devDependencies": {
+        "@cap-js/sqlite": "^1",
+        "@sap/cds-dk": "^7",
+        "@sap/ux-specification": "^1.108.11",
+        "rimraf": "^3.0.2"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "watch-adminapp": "cds watch --open adminapp/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy devtober --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    },
+    "sapux": [
+        "app/adminapp"
+    ],
+    "cds": {
+        "requires": {
+            "auth": "xsuaa",
+            "db": "hana"
+        }
+    }
 }
