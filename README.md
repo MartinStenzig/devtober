@@ -1,20 +1,25 @@
-# SAP Devtoberfest Session
-This session will forego any slides and focus on coding a SAP CAP application supplemented by Fiori Elements to build a Cloud Foundry application that integrates with an on-premise S/4 HANA system to solve a real world business problem.
+# Getting Started
 
-## Business Request
-- The University Maintenance Department requests an application to easily enter facility problems. 
-- The application should store the problems in a database and immediately create a maintenance notification in SAP to start the SAP Maintenance process.
+Welcome to your new project.
 
-## Fundamental Assumptions
-1. I have the necessary BTP entitlements or respective Cloud Credits to run the application.
-    - Cloud Foundry Runtime (1GB)
-    - SAP HANA Cloud
-    - HTML5 Application Repository
-    - Destination and Connectivity Services
-    - (SAP Business Application Studio)
-2. SAP Sub Account, SSO and HANA databases are already set up.
-3. A destination is configured in the BTP cockpit to connect to the SAP system.
-    - **Destination Name is:** s4v-ui-runtime (configured for Principal Propagation, not mandatory)
-4. **Fiori Elements** is used to visualize the UI and we are building the app in such a way that it can be easily deployed to the SAP Fiori Launchpad
-5. We are using **CAP Node.js** as a runtime for the core of the application
-6. The information is ultimately stored in a HANA Cloud database. For local development and testing we use a SQLite database.
+It contains these folders and files, following our recommended project layout:
+
+File or Folder | Purpose
+---------|----------
+`app/` | content for UI frontends goes here
+`db/` | your domain models and data go here
+`srv/` | your service models and code go here
+`package.json` | project metadata and configuration
+`readme.md` | this getting started guide
+
+
+## Next Steps
+
+- Open a new terminal and run `cds watch` 
+- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
+- Start adding content, for example, a [db/schema.cds](db/schema.cds).
+
+
+## Learn More
+
+Learn more at https://cap.cloud.sap/docs/get-started/.
