@@ -1,37 +1,58 @@
 {
-    "name": "devtober",
-    "version": "1.0.0",
-    "description": "A simple CAP project.",
-    "repository": "<Add your repository here>",
-    "license": "UNLICENSED",
-    "private": true,
-    "dependencies": {
-        "@sap/cds": "^7",
-        "express": "^4",
-        "@sap/xssec": "^3",
-        "passport": "^0",
-        "@sap/cds-hana": "^2"
-    },
-    "devDependencies": {
-        "@cap-js/sqlite": "^1",
-        "@sap/cds-dk": "^7",
-        "@sap/ux-specification": "^1.108.11",
-        "rimraf": "^3.0.2"
-    },
-    "scripts": {
-        "start": "cds-serve",
-        "watch-adminapp": "cds watch --open adminapp/webapp/index.html?sap-ui-xx-viewCache=false",
-        "undeploy": "cf undeploy devtober --delete-services --delete-service-keys --delete-service-brokers",
-        "build": "rimraf resources mta_archives && mbt build --mtar archive",
-        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
-    },
-    "sapux": [
-        "app/adminapp"
-    ],
-    "cds": {
-        "requires": {
-            "auth": "xsuaa",
-            "db": "hana"
+  "name": "devtober",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/connectivity": "^3.4.0",
+    "@sap-cloud-sdk/http-client": "^3.4.0",
+    "@sap-cloud-sdk/resilience": "^3.4.0",
+    "@sap-cloud-sdk/util": "^3.4.0",
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.108.11",
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-adminapp": "cds watch --open adminapp/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy devtober --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "sapux": [
+    "app/adminapp"
+  ],
+  "cds": {
+    "requires": {
+      "[development]": {
+        "OP_API_MAINTNOTIFICATION": {
+          "kind": "odata-v2",
+          "model": "srv/external/OP_API_MAINTNOTIFICATION"
         }
+      },
+      "[production]": {
+        "auth": "xsuaa",
+        "db": "hana",
+        "OP_API_MAINTNOTIFICATION": {
+          "kind": "odata-v2",
+          "model": "srv/external/OP_API_MAINTNOTIFICATION",
+          "csrf": true,
+          "credentials": {
+            "destination": "s4v-ui-runtime",
+            "path": "/sap/opu/odata/sap/API_MAINTNOTIFICATION"
+          }
+        }
+      }
     }
+  }
 }

@@ -1,0 +1,1519 @@
+{
+ "meta": {
+  "creator": "cds-dk 7.1.1"
+ },
+ "$version": "2.0",
+ "definitions": {
+  "OP_API_MAINTNOTIFICATION": {
+   "kind": "service",
+   "@cds.external": true,
+   "@m.IsDefaultEntityContainer": "true",
+   "@sap.message.scope.supported": "true",
+   "@sap.supported.formats": "atom json xlsx"
+  },
+  "OP_API_MAINTNOTIFICATION.MaintenanceNotification": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.deletable": "false",
+   "@sap.content.version": "1",
+   "@sap.label": "Maintenance Notification",
+   "elements": {
+    "MaintenanceNotification": {
+     "key": true,
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Notification",
+     "@sap.quickinfo": "Notification Number",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "MaintNotifInternalID": {
+     "type": "cds.String",
+     "length": 22,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Object number",
+     "@sap.quickinfo": "Object Number for Status Management",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "NotificationText": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Description",
+     "@sap.quickinfo": "Short Text",
+     "notNull": true
+    },
+    "MaintPriority": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "MaintPriorityDesc",
+     "@sap.label": "Priority"
+    },
+    "NotificationType": {
+     "type": "cds.String",
+     "length": 2,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Notification Type",
+     "@sap.updatable": "false"
+    },
+    "NotifProcessingPhase": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Notification Phase",
+     "@sap.quickinfo": "Notification Processing Phase",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "NotifProcessingPhaseDesc": {
+     "type": "cds.String",
+     "length": 60,
+     "@sap.label": "Short Descript.",
+     "@sap.quickinfo": "Short Text for Fixed Values",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintPriorityDesc": {
+     "type": "cds.String",
+     "length": 20,
+     "@sap.label": "Priority Text",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "CreationDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Created On",
+     "@sap.quickinfo": "Record Created On",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "LastChangeTime": {
+     "type": "cds.Time",
+     "@sap.label": "Time of Change",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "LastChangeDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Changed On",
+     "@sap.quickinfo": "Last Changed On",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "LastChangeDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "CreationTime": {
+     "type": "cds.Time",
+     "@sap.label": "Created At",
+     "@sap.quickinfo": "Time at Which Record Was Added",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "ReportedByUser": {
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "ReporterFullName",
+     "@sap.label": "Reported By",
+     "@sap.quickinfo": "Name of Person Reporting Notification"
+    },
+    "ReporterFullName": {
+     "type": "cds.String",
+     "length": 80,
+     "@sap.label": "Full Name",
+     "@sap.quickinfo": "Full Name of Person",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "PersonResponsible": {
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "PersonResponsibleName",
+     "@sap.label": "Person Resp. ID",
+     "@sap.quickinfo": "Person Responsible ID"
+    },
+    "MalfunctionEffect": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Effect",
+     "@sap.quickinfo": "Effect on Operation"
+    },
+    "MalfunctionEffectText": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Effect",
+     "@sap.quickinfo": "Text - Effect on Operation",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MalfunctionStartDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Malfunction Start",
+     "@sap.quickinfo": "Start of Malfunction (Date)"
+    },
+    "MalfunctionStartTime": {
+     "type": "cds.Time",
+     "@sap.label": "Mal. Start (T.)",
+     "@sap.quickinfo": "Start of Malfunction (Time)"
+    },
+    "MalfunctionEndDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Malfunction End",
+     "@sap.quickinfo": "End of Malfunction (Date)"
+    },
+    "MalfunctionEndTime": {
+     "type": "cds.Time",
+     "@sap.label": "Malfunction End",
+     "@sap.quickinfo": "End of Malfunction (Time)"
+    },
+    "MaintNotificationCatalog": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Catalog Coding",
+     "@sap.quickinfo": "Catalog Type - Coding",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotificationCode": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Coding Code",
+     "@sap.quickinfo": "Coding"
+    },
+    "MaintNotificationCodeGroup": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Code Group",
+     "@sap.quickinfo": "Code Group - Coding"
+    },
+    "CatalogProfile": {
+     "type": "cds.String",
+     "length": 9,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Catalog Profile",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "NotificationCreationDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Notification Date",
+     "@sap.quickinfo": "Date of Notification"
+    },
+    "NotificationCreationTime": {
+     "type": "cds.Time",
+     "@sap.label": "Notification Time",
+     "@sap.quickinfo": "Time of Notification"
+    },
+    "NotificationTimeZone": {
+     "type": "cds.String",
+     "length": 6,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Notif. Time Zone",
+     "@sap.quickinfo": "Time Zone for Notification",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "RequiredStartDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Required Start Date"
+    },
+    "RequiredStartTime": {
+     "type": "cds.Time",
+     "@sap.label": "Req. start time",
+     "@sap.quickinfo": "Required Start Time"
+    },
+    "RequiredEndDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Required End Date"
+    },
+    "RequiredEndTime": {
+     "type": "cds.Time",
+     "@sap.label": "Req. end time",
+     "@sap.quickinfo": "Required End Time"
+    },
+    "LatestAcceptableCompletionDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Final Due Date"
+    },
+    "MaintenanceObjectIsDown": {
+     "type": "cds.Boolean",
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Breakdown",
+     "@sap.quickinfo": "Breakdown Indicator"
+    },
+    "MaintNotificationLongText": {
+     "type": "cds.LargeString",
+     "@sap.label": "Long Text",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifLongTextForEdit": {
+     "type": "cds.String",
+     "length": 1333,
+     "@sap.label": "Long Text"
+    },
+    "TechnicalObject": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Technical Object"
+    },
+    "TechObjIsEquipOrFuncnlLoc": {
+     "type": "cds.String",
+     "length": 20,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Tech. Obj. Type",
+     "@sap.quickinfo": "Technical Object Type"
+    },
+    "TechnicalObjectLabel": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Technical Object",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintenancePlanningPlant": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "PlantName",
+     "@sap.label": "Planning Plant",
+     "@sap.quickinfo": "Maintenance Planning Plant"
+    },
+    "MaintenancePlannerGroup": {
+     "type": "cds.String",
+     "length": 3,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "MaintenancePlannerGroupName",
+     "@sap.label": "Maint. Planner Group",
+     "@sap.quickinfo": "Planner Group for Customer Service and Plant Maintenance"
+    },
+    "PlantSection": {
+     "type": "cds.String",
+     "length": 3,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "PlantSectionPersonRespName",
+     "@sap.label": "Plant Section"
+    },
+    "ABCIndicator": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "ABCIndicatorDesc",
+     "@sap.label": "ABC Indicator",
+     "@sap.quickinfo": "ABC Indicator for Technical Object",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "SuperiorTechnicalObject": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Technical Object",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "SuperiorTechnicalObjectName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Tech. Obj. Desc",
+     "@sap.quickinfo": "Technical Object Description",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "SuperiorObjIsEquipOrFuncnlLoc": {
+     "type": "cds.String",
+     "length": 20,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Tech. Obj. Type",
+     "@sap.quickinfo": "Technical Object Type",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "SuperiorTechnicalObjectLabel": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Technical Object",
+     "@sap.quickinfo": "Technical Object Identifier",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "ManufacturerPartTypeName": {
+     "type": "cds.String",
+     "length": 20,
+     "@sap.label": "Model number",
+     "@sap.quickinfo": "Manufacturer model number",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "TechObjIsEquipOrFuncnlLocDesc": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "TObj.Type Desc.",
+     "@sap.quickinfo": "Description of Technical Object Type",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "FunctionalLocation": {
+     "type": "cds.String",
+     "length": 30,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Object ID",
+     "@sap.quickinfo": "Object ID of Functional Location or Equipment",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "FunctionalLocationLabelName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Functional Location",
+     "@sap.quickinfo": "Functional Location Label",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "TechnicalObjectDescription": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Tech. Obj. Desc",
+     "@sap.quickinfo": "Technical Object Description",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "AssetLocation": {
+     "type": "cds.String",
+     "length": 10,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "LocationName",
+     "@sap.label": "Location",
+     "@sap.quickinfo": "Location of maintenance object"
+    },
+    "LocationName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Location Name",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "BusinessArea": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Business Area",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "CompanyCode": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Company Code",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "TechnicalObjectCategory": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Tech. Obj. Category",
+     "@sap.quickinfo": "Technical Object Category",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "TechnicalObjectType": {
+     "type": "cds.String",
+     "length": 10,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Object Type",
+     "@sap.quickinfo": "Type of Technical Object",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MainWorkCenterPlant": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "MainWorkCenterPlantName",
+     "@sap.label": "Plant"
+    },
+    "MainWorkCenter": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "MainWorkCenterText",
+     "@sap.label": "Work Center"
+    },
+    "PlantName": {
+     "type": "cds.String",
+     "length": 30,
+     "@sap.label": "Plant Name",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintenancePlannerGroupName": {
+     "type": "cds.String",
+     "length": 18,
+     "@sap.label": "Planner Group Name",
+     "@sap.quickinfo": "Name of the Maintenance Planner Group",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintenancePlant": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "MaintenancePlantName",
+     "@sap.label": "Maintenance Plant"
+    },
+    "LocationDescription": {
+     "type": "cds.String",
+     "length": 50,
+     "@sap.label": "Current Location",
+     "@sap.quickinfo": "Description of Current Location"
+    },
+    "MainWorkCenterText": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Work Center Text",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MainWorkCenterPlantName": {
+     "type": "cds.String",
+     "length": 30,
+     "@sap.label": "Plant Name",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintenancePlantName": {
+     "type": "cds.String",
+     "length": 30,
+     "@sap.label": "Plant Name",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "PlantSectionPersonRespName": {
+     "type": "cds.String",
+     "length": 14,
+     "@sap.label": "EmplGrp Responsible",
+     "@sap.quickinfo": "Group of Employees Responsible for Company Area",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "ABCIndicatorDesc": {
+     "type": "cds.String",
+     "length": 20,
+     "@sap.label": "ABC Ind. Descr.",
+     "@sap.quickinfo": "Description of ABC Indicator of Technical Object",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "PersonResponsibleName": {
+     "type": "cds.String",
+     "length": 35,
+     "@sap.label": "Person Responsible",
+     "@sap.quickinfo": "Person Responsible Name",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "MaintenanceOrder": {
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Order",
+     "@sap.quickinfo": "Order Number"
+    },
+    "MaintenanceOrderType": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Order Type",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "ConcatenatedActiveSystStsName": {
+     "type": "cds.String",
+     "length": 224,
+     "@sap.label": "Concatenated System Status",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "MaintenanceActivityType": {
+     "type": "cds.String",
+     "length": 3,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Activity Type",
+     "@sap.quickinfo": "Maintenance Activity Type"
+    },
+    "MaintObjDowntimeDurationUnit": {
+     "type": "cds.String",
+     "length": 3,
+     "@sap.label": "Breakdown durtn unit",
+     "@sap.quickinfo": "Unit for Breakdown Duration",
+     "@sap.semantics": "unit-of-measure"
+    },
+    "MaintObjectDowntimeDuration": {
+     "type": "cds.Double",
+     "@sap.label": "Breakdown Duration"
+    },
+    "MaintenancePlan": {
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Maintenance Plan",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintenanceItem": {
+     "type": "cds.String",
+     "length": 16,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Maintenance Item",
+     "@sap.quickinfo": "Maintenance item",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "TaskListGroup": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Group",
+     "@sap.quickinfo": "Key for Task List Group",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "TaskListGroupCounter": {
+     "type": "cds.String",
+     "length": 2,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Group Counter",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintenancePlanCallNumber": {
+     "type": "cds.Integer",
+     "@sap.label": "MntPlan Call No.",
+     "@sap.quickinfo": "Maintenance Plan Call Number",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintenanceTaskListType": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Task List Type",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "TaskList": {
+     "type": "cds.String",
+     "length": 13
+    },
+    "NotificationReferenceDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Reference Date",
+     "@sap.quickinfo": "Notification Reference Date"
+    },
+    "NotificationReferenceTime": {
+     "type": "cds.Time",
+     "@sap.label": "Reference Time",
+     "@sap.quickinfo": "Notification Reference Time"
+    },
+    "NotificationCompletionDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Completion by Date",
+     "@sap.quickinfo": "Date for Notification Completion",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "CompletionTime": {
+     "type": "cds.Time",
+     "@sap.label": "Completion Time",
+     "@sap.quickinfo": "Completion Time of Notification",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "AssetRoom": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Room"
+    },
+    "MaintNotifExtReferenceNumber": {
+     "type": "cds.String",
+     "length": 20,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Reference number",
+     "@sap.quickinfo": "External Reference Number"
+    },
+    "MaintNotifRejectionReasonCode": {
+     "type": "cds.String",
+     "length": 3,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Reason Code",
+     "@sap.quickinfo": "Maintenance Reason Code",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifRejectionRsnCodeTxt": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Reason Code Desc",
+     "@sap.quickinfo": "Maintenance Reason Code Description",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifDetectionCatalog": {
+     "type": "cds.String",
+     "length": 2,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Detection Meth Prfl",
+     "@sap.quickinfo": "Detection Method Profile",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifDetectionCode": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "MaintNotifDetectionCodeText",
+     "@sap.label": "Detection Method"
+    },
+    "MaintNotifDetectionCodeText": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Detection Meth Desc",
+     "@sap.quickinfo": "Detection Method Description",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifDetectionCodeGroup": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "MaintNotifDetectionCodeGrpTxt",
+     "@sap.label": "Detection Meth Grp",
+     "@sap.quickinfo": "Detection Method Group"
+    },
+    "MaintNotifDetectionCodeGrpTxt": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Dtctn Meth Grp Desc",
+     "@sap.quickinfo": "Detection Method Group Description",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifProcessPhaseCode": {
+     "type": "cds.String",
+     "length": 2,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "EAMProcessPhaseCodeDesc",
+     "@sap.label": "Process Phase",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifProcessSubPhaseCode": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "EAMProcessSubPhaseCodeDesc",
+     "@sap.label": "Process Subphase",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "EAMProcessPhaseCodeDesc": {
+     "type": "cds.String",
+     "length": 60,
+     "@sap.label": "Short Descript.",
+     "@sap.quickinfo": "Short Text for Fixed Values",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "EAMProcessSubPhaseCodeDesc": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Subphase Description",
+     "@sap.quickinfo": "Description of Overall Process Subphase",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "CreationDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MalfunctionStartDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MalfunctionEndDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "NotificationCreationDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifRqdStartDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifRqdEndDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)"
+    },
+    "PreviousFinalDueDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Prev. Final Due Date",
+     "@sap.quickinfo": "Previous Final Due Date",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "to_Item": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Composition",
+     "target": "OP_API_MAINTNOTIFICATION.MaintenanceNotificationItem",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "to_Item",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    },
+    "to_Partner": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Composition",
+     "target": "OP_API_MAINTNOTIFICATION.MaintenanceNotificationPartner",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "to_Partner",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    }
+   },
+   "actions": {
+    "CompleteMaintNotification": {
+     "kind": "action",
+     "params": {
+      "MaintNotifReferenceDateTime": {
+       "type": "cds.DateTime",
+       "@odata.Type": "Edm.DateTimeOffset",
+       "@sap.label": "Reference Date Time"
+      },
+      "NotificationReferenceDate": {
+       "type": "cds.Date",
+       "@sap.label": "Reference Date",
+       "@sap.display.format": "Date"
+      },
+      "NotificationReferenceTime": {
+       "type": "cds.Time",
+       "@sap.label": "Reference Time"
+      }
+     },
+     "returns": {
+      "type": "OP_API_MAINTNOTIFICATION.MaintenanceNotification"
+     }
+    },
+    "SetMaintNotifToInProcess": {
+     "kind": "action",
+     "returns": {
+      "type": "OP_API_MAINTNOTIFICATION.MaintenanceNotification"
+     }
+    }
+   }
+  },
+  "OP_API_MAINTNOTIFICATION.MaintenanceNotificationItem": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.deletable": "false",
+   "@sap.content.version": "1",
+   "@sap.label": "Maintenance Notification Item",
+   "elements": {
+    "MaintenanceNotification": {
+     "key": true,
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Notification",
+     "@sap.quickinfo": "Notification Number",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "MaintenanceNotificationItem": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "NonNegative",
+     "@sap.label": "Item",
+     "@sap.quickinfo": "Item Number in Item Record",
+     "notNull": true
+    },
+    "MaintNotifItemText": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Item Text",
+     "@sap.quickinfo": "Notification Item Short Text"
+    },
+    "MaintNotifDamageCodeGroup": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Damage Code Group"
+    },
+    "MaintNotifDamageCodeGroupName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Code Group Text",
+     "@sap.quickinfo": "Text for Code Group",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotificationDamageCode": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Damage Code"
+    },
+    "MaintNotifDamageCodeName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Code Text",
+     "@sap.quickinfo": "Text for Code",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifObjPrtCodeGroup": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Obj. Part Code Group",
+     "@sap.quickinfo": "Object Part Code Group"
+    },
+    "MaintNotifObjPrtCodeGroupName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Code Group Text",
+     "@sap.quickinfo": "Text for Code Group",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifObjPrtCode": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Object Part Code"
+    },
+    "MaintNotifObjPrtCodeName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Code Text",
+     "@sap.quickinfo": "Text for Code",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "IsDeleted": {
+     "type": "cds.Boolean",
+     "@sap.label": "Delete",
+     "@sap.quickinfo": "Delete Data Record",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifItemChangedDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifItemCreationDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "to_Notif": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "OP_API_MAINTNOTIFICATION.MaintenanceNotification",
+     "on": [
+      {
+       "ref": [
+        "to_Notif",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    },
+    "to_ItemActivity": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Composition",
+     "target": "OP_API_MAINTNOTIFICATION.MaintNotificationItemActivity",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "to_ItemActivity",
+        "MaintenanceNotificationItem"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotificationItem"
+       ]
+      },
+      "and",
+      {
+       "ref": [
+        "to_ItemActivity",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    },
+    "to_ItemCause": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Composition",
+     "target": "OP_API_MAINTNOTIFICATION.MaintNotificationItemCause",
+     "cardinality": {
+      "max": "*"
+     },
+     "on": [
+      {
+       "ref": [
+        "to_ItemCause",
+        "MaintenanceNotificationItem"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotificationItem"
+       ]
+      },
+      "and",
+      {
+       "ref": [
+        "to_ItemCause",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "OP_API_MAINTNOTIFICATION.MaintenanceNotificationPartner": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.deletable": "false",
+   "@sap.content.version": "1",
+   "@sap.label": "Maintenance Notification Partner",
+   "elements": {
+    "MaintenanceNotification": {
+     "key": true,
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Notification",
+     "@sap.quickinfo": "Notification Number",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "PartnerFunction": {
+     "key": true,
+     "type": "cds.String",
+     "length": 2,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Partner Function",
+     "notNull": true
+    },
+    "NotificationPartnerObjectNmbr": {
+     "key": true,
+     "type": "cds.String",
+     "length": 6,
+     "@sap.display.format": "NonNegative",
+     "@sap.label": "Counter",
+     "@sap.quickinfo": "Counter for differentiation 6-digit",
+     "notNull": true
+    },
+    "Partner": {
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Partner"
+    },
+    "to_Notif": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "OP_API_MAINTNOTIFICATION.MaintenanceNotification",
+     "on": [
+      {
+       "ref": [
+        "to_Notif",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "OP_API_MAINTNOTIFICATION.MaintNotificationItemActivity": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.deletable": "false",
+   "@sap.content.version": "1",
+   "@sap.label": "Maintenance Notification Item Activity",
+   "elements": {
+    "MaintNotificationActivity": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "NonNegative",
+     "@sap.label": "Activity",
+     "@sap.quickinfo": "Consecutive Number of Activity",
+     "notNull": true
+    },
+    "MaintenanceNotification": {
+     "key": true,
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Notification",
+     "@sap.quickinfo": "Notification Number",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "MaintenanceNotificationItem": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "NonNegative",
+     "@sap.label": "Item",
+     "@sap.quickinfo": "Item Number in Item Record",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "MaintNotifActivitySortNumber": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "NonNegative",
+     "@sap.label": "Activity Sort Number",
+     "@sap.quickinfo": "Sort Number for Activity"
+    },
+    "MaintNotifActyTxt": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Activity Text"
+    },
+    "MaintNotifActivityCodeGroup": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Activity Code Group"
+    },
+    "NotifActivityCodeGroupText": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Code Group Text",
+     "@sap.quickinfo": "Text for Code Group",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotificationActivityCode": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Activity Code"
+    },
+    "NotifActivityCodeText": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Code Text",
+     "@sap.quickinfo": "Text for Code",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "PlannedStartDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "Start Date",
+     "@sap.quickinfo": "Activity Start Date"
+    },
+    "PlannedStartTime": {
+     "type": "cds.Time",
+     "@sap.label": "Time",
+     "@sap.quickinfo": "Start Time of Activity"
+    },
+    "PlannedEndDate": {
+     "type": "cds.Date",
+     "@sap.display.format": "Date",
+     "@sap.label": "End Date",
+     "@sap.quickinfo": "Activity End Date"
+    },
+    "PlannedEndTime": {
+     "type": "cds.Time",
+     "@sap.label": "Time",
+     "@sap.quickinfo": "End Time of Activity"
+    },
+    "IsDeleted": {
+     "type": "cds.Boolean",
+     "@sap.label": "Delete",
+     "@sap.quickinfo": "Delete Data Record",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifItmActyStrtDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifItemActyEndDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifItemActyCrtnDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifItemActyChgdDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "to_Item": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "OP_API_MAINTNOTIFICATION.MaintenanceNotificationItem",
+     "on": [
+      {
+       "ref": [
+        "to_Item",
+        "MaintenanceNotificationItem"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotificationItem"
+       ]
+      },
+      "and",
+      {
+       "ref": [
+        "to_Item",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    },
+    "to_Notif": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "OP_API_MAINTNOTIFICATION.MaintenanceNotification",
+     "on": [
+      {
+       "ref": [
+        "to_Notif",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "OP_API_MAINTNOTIFICATION.MaintNotificationItemCause": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.deletable": "false",
+   "@sap.content.version": "1",
+   "@sap.label": "Maintenance Notification Item Cause",
+   "elements": {
+    "MaintenanceNotification": {
+     "key": true,
+     "type": "cds.String",
+     "length": 12,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Notification",
+     "@sap.quickinfo": "Notification Number",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "MaintenanceNotificationItem": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "NonNegative",
+     "@sap.label": "Item",
+     "@sap.quickinfo": "Item Number in Item Record",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "MaintenanceNotificationCause": {
+     "key": true,
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "NonNegative",
+     "@sap.label": "Cause",
+     "@sap.quickinfo": "Sequential Number for Cause",
+     "notNull": true
+    },
+    "MaintNotifCauseText": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Cause Text"
+    },
+    "MaintNotifCauseCodeGroup": {
+     "type": "cds.String",
+     "length": 8,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Cause Code Group"
+    },
+    "MaintNotifCauseCodeGroupName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Code Group Text",
+     "@sap.quickinfo": "Text for Code Group",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotificationCauseCode": {
+     "type": "cds.String",
+     "length": 4,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Cause Code"
+    },
+    "MaintNotificationCauseCodeName": {
+     "type": "cds.String",
+     "length": 40,
+     "@sap.label": "Code Text",
+     "@sap.quickinfo": "Text for Code",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotificationRootCause": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Root Cause"
+    },
+    "MaintNotificationRootCauseText": {
+     "type": "cds.String",
+     "length": 60,
+     "@sap.label": "Short Descript.",
+     "@sap.quickinfo": "Short Text for Fixed Values",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "IsDeleted": {
+     "type": "cds.Boolean",
+     "@sap.label": "Delete",
+     "@sap.quickinfo": "Delete Data Record",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifItmCauseChgdDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "MaintNotifItmCauseCrtnDateTime": {
+     "type": "cds.DateTime",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@sap.label": "Short Time Stamp",
+     "@sap.quickinfo": "UTC Time Stamp in Short Form (YYYYMMDDhhmmss)",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "to_Item": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "OP_API_MAINTNOTIFICATION.MaintenanceNotificationItem",
+     "on": [
+      {
+       "ref": [
+        "to_Item",
+        "MaintenanceNotificationItem"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotificationItem"
+       ]
+      },
+      "and",
+      {
+       "ref": [
+        "to_Item",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    },
+    "to_Notif": {
+     "@cds.ambiguous": "missing on condition?",
+     "type": "cds.Association",
+     "target": "OP_API_MAINTNOTIFICATION.MaintenanceNotification",
+     "on": [
+      {
+       "ref": [
+        "to_Notif",
+        "MaintenanceNotification"
+       ]
+      },
+      "=",
+      {
+       "ref": [
+        "MaintenanceNotification"
+       ]
+      }
+     ]
+    }
+   }
+  }
+ }
+}

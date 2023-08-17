@@ -9,6 +9,8 @@ modules:
     requires:
       - name: devtober-auth
       - name: devtober-db
+      - name: devtober-destination-service
+      - name: devtober-connectivity
     provides:
       - name: srv-api
         properties:
